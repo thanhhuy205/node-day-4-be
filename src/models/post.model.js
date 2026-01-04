@@ -15,6 +15,8 @@ class PostModel {
 
       params.push(Number(per_page));
       params.push(Number(offset));
+      console.log(per_page);
+      console.log(offset);
 
       const [rows] = await pool.query(
         `

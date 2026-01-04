@@ -7,16 +7,18 @@ class PaginationService {
     }
 
     service.pagination = async function ({
-      current_page = 1,
-      per_page = PER_PAGE,
+      current_page,
+      per_page,
       filters = {},
     }) {
       per_page = Math.min(per_page, MAX_LIMIT);
       const offset = (current_page - 1) * per_page;
+      console.log(per_page);
+      console.log(offset);
 
       const [total, rows] = await Promise.all([
         this.model.count(filters),
-        this.model.findAll({ filters, offset, limit: per_page }),
+        this.model.findAll({ filters, offset, per_page }),
       ]);
       const count = total;
       return {
